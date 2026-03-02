@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ПЕРЕМЕНКА — магазин игрушек и канцтоваров</title>
+    <!-- Подключение шрифтов Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome для иконок -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ОБНУЛЕНИЕ И БАЗОВЫЕ СТИЛИ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: #1e2f4e;
+            line-height: 1.6;
+            background-color: #fefbf6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* КНОПКИ - все одинаковые */
+        .btn {
+            display: inline-block;
+            background-color: #ff8a5c;
+            color: white;
+            font-weight: 600;
+            padding: 14px 32px;
+            border-radius: 60px;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 8px 16px rgba(255, 138, 92, 0.25);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn i {
+            margin-left: 8px;
+        }
+
+        .btn:hover {
+            background-color: #ff6f3c;
+            transform: scale(1.05);
+        }
+
+        /* все кнопки теперь одинаковые, отдельный класс не нужен */
+
+        /* ШАПКА / ПЕРВЫЙ ЭКРАН */
+        .hero {
+            background: linear-gradient(135deg, #fff6ed 0%, #ffe6d5 100%);
+            padding: 40px 0 60px;
+            border-bottom: 4px solid #ffd5b3;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .hero-text {
+            flex: 1 1 400px;
+        }
+
+        .hero-text h1 {
+            font-size: 3.2rem;
+            line-height: 1.2;
+            color: #1e2f4e;
+            margin-bottom: 20px;
+        }
+
+        .hero-text .highlight {
+            color: #ff6f3c;
+            background: linear-gradient(145deg, #ffead2, #fff);
+            display: inline-block;
+            padding: 0 8px;
+            border-radius: 20px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            font-weight: 400;
+            color: #2a3f64;
+            margin-bottom: 20px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: #3a4f74;
+        }
+
+        .hero-image {
+            flex: 1 1 400px;
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 40px;
+            box-shadow: 0 30px 40px -20px rgba(0,0,0,0.3);
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+        }
+
+        /* секции общие */
+        .section {
+            padding: 70px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.4rem;
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #4f658a;
+            margin-bottom: 50px;
+            font-weight: 400;
+        }
+
+        /* ПРЕИМУЩЕСТВА (иконки) */
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .advantage-item {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: 0.2s;
+            border: 1px solid #ffe3d0;
+        }
+
+        .advantage-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(255, 138, 92, 0.15);
+        }
+
+        .advantage-icon {
+            font-size: 3rem;
+            color: #ff8a5c;
+            margin-bottom: 20px;
+        }
+
+        .advantage-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .advantage-item p {
+            color: #4f658a;
+        }
+
+        /* КАТЕГОРИИ ТОВАРОВ (плитки) */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 25px;
+        }
+
+        .category-card {
+            background: #fff;
+            border-radius: 40px;
+            padding: 25px 15px;
+            text-align: center;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.03);
+            border: 1px solid #fadbc8;
+            transition: 0.2s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .category-card:hover {
+            border-color: #ff8a5c;
+            background: #fffaf5;
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .category-card span {
+            font-weight: 600;
+            font-size: 1.2rem;
+            display: block;
+            margin-top: 5px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* АКЦИИ */
+        .promo-box {
+            background: linear-gradient(120deg, #1e2f4e, #2f4172);
+            border-radius: 50px;
+            padding: 50px 40px;
+            color: white;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .promo-text {
+            flex: 1;
+        }
+
+        .promo-text h3 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .promo-text p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .promo-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+        }
+
+        /* Все кнопки в акциях тоже оранжевые */
+        .promo-buttons .btn {
+            background-color: #ff8a5c;
+            color: white;
+            box-shadow: 0 8px 16px rgba(255, 138, 92, 0.25);
+            margin: 0;
+        }
+
+        /* КОНТАКТЫ И КАРТА */
+        .contact-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            background: white;
+            border-radius: 50px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            border: 1px solid #ffdec9;
+        }
+
+        .contact-info {
+            flex: 1 1 250px;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+        }
+
+        .contact-detail {
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-detail i {
+            font-size: 1.8rem;
+            color: #ff8a5c;
+            width: 40px;
+        }
+
+        .contact-detail p {
+            font-size: 1.1rem;
+        }
+
+        .contact-detail .phone-numbers {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-detail a {
+            color: #1e2f4e;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .contact-detail a:hover {
+            color: #ff8a5c;
+        }
+
+        /* Стили для блока с картой */
+        .map-container {
+            flex: 2 1 400px;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 2px solid #ffb085;
+            background: #f0f0f0;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .map-frame {
+            width: 100%;
+            height: 250px;
+            border: none;
+        }
+
+        .map-footer {
+            padding: 15px 20px;
+            background: white;
+            border-top: 1px solid #ffdec9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .map-footer p {
+            margin: 0;
+            font-weight: 600;
+            color: #1e2f4e;
+        }
+
+        .map-footer .btn-small {
+            padding: 8px 20px;
+            font-size: 0.9rem;
+        }
+
+        /* ПОДВАЛ */
+        .footer {
+            background: #1e2f4e;
+            color: #d9e2f0;
+            padding: 40px 0;
+            text-align: center;
+            border-radius: 40px 40px 0 0;
+            margin-top: 40px;
+        }
+
+        .footer a {
+            color: #ffb085;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .social-links {
+            margin: 20px 0;
+        }
+
+        .social-links a {
+            color: white;
+            background: #3a4f74;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 8px;
+            font-size: 1.5rem;
+            transition: 0.2s;
+        }
+
+        .social-links a:hover {
+            background: #ff8a5c;
+            transform: scale(1.1);
+            text-decoration: none;
+        }
+
+        /* адаптация */
+        @media (max-width: 768px) {
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .promo-box {
+                flex-direction: column;
+                text-align: center;
+                gap: 25px;
+            }
+            .promo-buttons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ШАПКА / ПЕРВЫЙ ЭКРАН (с двумя одинаковыми кнопками) -->
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>
+                    <span class="highlight">ПЕРЕМЕНКА</span> <br>
+                    всё для учёбы и отличного настроения!
+                </h1>
+                <p class="hero-subtitle">Игрушки, канцтовары, печать документов и товары для творчества в одном месте.</p>
+                <p class="hero-description">
+                    <i class="fas fa-map-pin" style="color:#ff8a5c;"></i> Рядом со школой, уютно и ярко. Заходи на переменке!
+                </p>
+                <div class="hero-buttons">
+                    <a href="https://vk.com/club231383584" target="_blank" class="btn">
+                        Смотреть каталог ВКонтакте <i class="fab fa-vk"></i>
+                    </a>
+                    <a href="https://t.me/Peremenka18" target="_blank" class="btn">
+                        Telegram <i class="fab fa-telegram"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://avatars.mds.yandex.net/get-altay/16494614/2a0000019a394bae6856689b153b2b9f3cdb/XXXL"
+                     alt="Витрина магазина Переменка">
+            </div>
+        </div>
+    </section>
+
+    <!-- ПРЕИМУЩЕСТВА -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Почему нас выбирают</h2>
+            <p class="section-subtitle">Потому что «ПЕРЕМЕНКА» — это больше, чем магазин</p>
+            <div class="advantages-grid">
+                <div class="advantage-item">
+                    <div class="advantage-icon"><i class="fas fa-cubes"></i></div>
+                    <h3>Широкий ассортимент</h3>
+                    <p>От мягких игрушек и конструкторов до тетрадей, ручек и наборов для творчества.</p>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-icon"><i class="fas fa-print"></i></div>
+                    <h3>Услуги печати</h3>
+                    <p>Быстрая печать рефератов, курсовых, цветная и ч/б печать, ксерокопии.</p>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-icon"><i class="fas fa-users"></i></div>
+                    <h3>Для всей семьи</h3>
+                    <p>Найдем товары как для малышей, так и для школьников и родителей.</p>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-icon"><i class="fas fa-heart"></i></div>
+                    <h3>Уютная атмосфера</h3>
+                    <p>Магазин, куда хочется заходить снова и снова. Встречаем с улыбкой!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ПОПУЛЯРНЫЕ КАТЕГОРИИ -->
+    <section class="section" style="background-color: #fbf4ec;">
+        <div class="container">
+            <h2 class="section-title">Популярные категории</h2>
+            <p class="section-subtitle">Листайте, выбирайте, заходите в гости</p>
+            <div class="categories-grid">
+                <a href="https://vk.com/club231383584" target="_blank" class="category-card">
+                    <div class="category-icon"><i class="fas fa-paw"></i></div>
+                    <span>Мягкие игрушки</span>
+                </a>
+                <a href="https://vk.com/club231383584" target="_blank" class="category-card">
+                    <div class="category-icon"><i class="fas fa-puzzle-piece"></i></div>
+                    <span>Конструкторы</span>
+                </a>
+                <a href="https://vk.com/club231383584" target="_blank" class="category-card">
+                    <div class="category-icon"><i class="fas fa-pencil-alt"></i></div>
+                    <span>Товары для школы</span>
+                </a>
+                <a href="https://vk.com/club231383584" target="_blank" class="category-card">
+                    <div class="category-icon"><i class="fas fa-paint-brush"></i></div>
+                    <span>Творчество</span>
+                </a>
+                <a href="https://vk.com/club231383584" target="_blank" class="category-card">
+                    <div class="category-icon"><i class="fas fa-dice-d6"></i></div>
+                    <span>Настольные игры</span>
+                </a>
+                <a href="https://vk.com/club231383584" target="_blank" class="category-card">
+                    <div class="category-icon"><i class="fas fa-copy"></i></div>
+                    <span>Печать и копии</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- БЛОК АКЦИИ (кнопки одного цвета и выровнены) -->
+    <section class="section">
+        <div class="container">
+            <div class="promo-box">
+                <div class="promo-text">
+                    <h3><i class="fas fa-tag"></i> Спецпредложение</h3>
+                    <p>Скажи промокод "Детство" и получи 3% скидку на игрушки!</p>
+                    <div class="promo-buttons">
+                        <a href="https://vk.com/club231383584" target="_blank" class="btn">Все акции ВК <i class="fab fa-vk"></i></a>
+                        <a href="https://t.me/Peremenka18" target="_blank" class="btn">Наш Telegram <i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- КОНТАКТЫ И КАРТА -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Как нас найти</h2>
+            <p class="section-subtitle">Ждём вас в гости, будем знакомы!</p>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Контакты</h3>
+                    <div class="contact-detail">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p><strong>Адрес:</strong> Первомайский район, ул. Оружейников, 1Е</p>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="fas fa-clock"></i>
+                        <p><strong>Режим работы:</strong><br>ПН-ВС: 10:00 - 20:00</p>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="fas fa-phone-alt"></i>
+                        <div class="phone-numbers">
+                            <a href="tel:+79828370112">+7 (982) 837-01-12</a>
+                            <a href="tel:+79127474909" style="margin-top: 5px;">+7 (912) 747-49-09</a>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="fab fa-vk"></i>
+                        <p><strong>ВКонтакте:</strong> <a href="https://vk.com/club231383584" target="_blank" style="color:#ff6f3c;">vk.com/club231383584</a></p>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="fab fa-telegram"></i>
+                        <p><strong>Telegram:</strong> <a href="https://t.me/Peremenka18" target="_blank" style="color:#ff6f3c;">@Peremenka18</a></p>
+                    </div>
+                </div>
+
+                <!-- Блок с Яндекс.Картой -->
+                <div class="map-container">
+                    <iframe class="map-frame" 
+                        src="https://yandex.ru/map-widget/v1/?ll=53.312111%2C56.867528&z=16.98&pt=53.312111%2C56.867528&mode=search&text=Переменка" 
+                        allowfullscreen="true">
+                    </iframe>
+                    <div class="map-footer">
+                        <p><i class="fas fa-map-pin" style="color:#ff8a5c;"></i> ул. Оружейников, 1Е</p>
+                        <a href="https://yandex.ru/maps/org/peremenka/8690861247/?ll=53.312111%2C56.867528&z=16.98" target="_blank" class="btn btn-small" style="padding: 8px 20px; font-size:0.9rem;">
+                            Открыть в Яндекс.Картах <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ПОДВАЛ -->
+    <footer class="footer">
+        <div class="container">
+            <div style="font-size: 2rem; font-family: 'Montserrat', sans-serif; font-weight: 700; margin-bottom: 15px;">
+                ПЕРЕМЕНКА
+            </div>
+            <p style="font-size: 1.2rem; margin-bottom: 20px;">Играй, учись, твори!</p>
+            <div class="social-links">
+                <a href="https://vk.com/club231383584" target="_blank" aria-label="ВКонтакте"><i class="fab fa-vk"></i></a>
+                <a href="https://t.me/Peremenka18" target="_blank" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+            </div>
+            <p style="margin-top: 25px; opacity: 0.7;">© 2025 Магазин игрушек и канцтоваров «ПЕРЕМЕНКА»<br>Все права защищены. </p>
+            <p style="margin-top: 10px;"><a href="https://vk.com/club231383584" target="_blank">Наша группа ВК</a> | <a href="https://t.me/Peremenka18" target="_blank">Наш Telegram</a></p>
+        </div>
+    </footer>
+
+    <!-- плавающая панель с соцсетями -->
+    <div style="position: fixed; bottom: 20px; right: 20px; background: #ff8a5c; border-radius: 60px; padding: 12px 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.2); z-index: 100; display: flex; gap: 15px;">
+        <a href="https://vk.com/club231383584" target="_blank" style="color: white; text-decoration: none; font-weight: 600;"><i class="fab fa-vk"></i></a>
+        <a href="https://t.me/Peremenka18" target="_blank" style="color: white; text-decoration: none; font-weight: 600;"><i class="fab fa-telegram"></i></a>
+    </div>
+</body>
+</html>
