@@ -62,8 +62,6 @@
             transform: scale(1.05);
         }
 
-        /* все кнопки теперь одинаковые, отдельный класс не нужен */
-
         /* ШАПКА / ПЕРВЫЙ ЭКРАН */
         .hero {
             background: linear-gradient(135deg, #fff6ed 0%, #ffe6d5 100%);
@@ -224,32 +222,38 @@
             font-family: 'Montserrat', sans-serif;
         }
 
-        /* АКЦИИ */
+        /* АКЦИИ - ИСПРАВЛЕНО ДЛЯ МОБИЛЬНЫХ */
         .promo-box {
             background: linear-gradient(120deg, #1e2f4e, #2f4172);
-            border-radius: 50px;
-            padding: 50px 40px;
+            border-radius: 30px; /* Уменьшил для мобильных */
+            padding: 30px 20px; /* Уменьшил отступы */
             color: white;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
             margin-top: 30px;
+            width: 100%;
+            overflow: hidden; /* Чтобы ничего не вылезало */
         }
 
         .promo-text {
             flex: 1;
+            min-width: 0; /* Разрешает сжиматься */
+            word-wrap: break-word; /* Переносит длинные слова */
         }
 
         .promo-text h3 {
             font-size: 2rem;
             margin-bottom: 15px;
+            word-break: break-word; /* Переносит заголовок */
         }
 
         .promo-text p {
             font-size: 1.2rem;
             opacity: 0.9;
             margin-bottom: 20px;
+            word-break: break-word;
         }
 
         .promo-buttons {
@@ -257,14 +261,6 @@
             flex-wrap: wrap;
             gap: 15px;
             align-items: center;
-        }
-
-        /* Все кнопки в акциях тоже оранжевые */
-        .promo-buttons .btn {
-            background-color: #ff8a5c;
-            color: white;
-            box-shadow: 0 8px 16px rgba(255, 138, 92, 0.25);
-            margin: 0;
         }
 
         /* КОНТАКТЫ И КАРТА */
@@ -405,30 +401,76 @@
             text-decoration: none;
         }
 
-        /* адаптация */
+        /* МОБИЛЬНАЯ АДАПТАЦИЯ - УСИЛЕННАЯ */
         @media (max-width: 768px) {
             .hero-text h1 {
-                font-size: 2.5rem;
+                font-size: 2.2rem; /* Ещё уменьшил */
             }
             .hero-subtitle {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
             }
             .section-title {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
+            
+            /* СПЕЦПРЕДЛОЖЕНИЕ НА МОБИЛЬНЫХ */
             .promo-box {
-                flex-direction: column;
-                text-align: center;
-                gap: 25px;
+                padding: 25px 15px; /* Минимальные отступы */
+                border-radius: 25px;
             }
+            
+            .promo-text h3 {
+                font-size: 1.6rem; /* Значительно меньше */
+                margin-bottom: 10px;
+            }
+            
+            .promo-text p {
+                font-size: 1rem; /* Обычный текст */
+                margin-bottom: 15px;
+            }
+            
             .promo-buttons {
-                justify-content: center;
+                flex-direction: column; /* Кнопки друг под другом */
+                align-items: stretch; /* Растягиваются на всю ширину */
+                gap: 10px;
+            }
+            
+            .promo-buttons .btn {
+                width: 100%; /* Кнопки на всю ширину */
+                text-align: center;
+                padding: 12px 20px; /* Чуть меньше */
+                font-size: 0.95rem;
+            }
+            
+            /* Контакты */
+            .contact-grid {
+                padding: 25px 15px;
+                border-radius: 30px;
+            }
+            
+            .map-container {
+                border-radius: 25px;
+            }
+            
+            .map-frame {
+                height: 200px;
+            }
+        }
+
+        /* Для очень маленьких экранов */
+        @media (max-width: 480px) {
+            .promo-text h3 {
+                font-size: 1.4rem;
+            }
+            
+            .promo-text p {
+                font-size: 0.95rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- ШАПКА / ПЕРВЫЙ ЭКРАН (с двумя одинаковыми кнопками) -->
+    <!-- ШАПКА / ПЕРВЫЙ ЭКРАН -->
     <section class="hero">
         <div class="container hero-content">
             <div class="hero-text">
@@ -520,7 +562,7 @@
         </div>
     </section>
 
-    <!-- БЛОК АКЦИИ (кнопки одного цвета и выровнены) -->
+    <!-- БЛОК АКЦИИ (теперь идеально на мобильных) -->
     <section class="section">
         <div class="container">
             <div class="promo-box">
